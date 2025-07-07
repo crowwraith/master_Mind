@@ -38,9 +38,9 @@ def get_Feedback(secret, guess):
             guess_Counts[g_key] = guess_Counts.get(g_key, 0) + 1
 
     white_Pegs = sum(
-    min(secret_Counts.get(k, 0), guess_Counts.get(k, 0))
-    for k in guess_Counts
-)
+        min(secret_Counts.get(k, 0), guess_Counts.get(k, 0))
+        for k in guess_Counts
+    )
 
     return black_Pegs, white_Pegs
 
