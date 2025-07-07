@@ -3,22 +3,25 @@
 # by ICTROCN
 # v1.02
 # 15-8-2024
-# lastmod by DevBart : admin check on cheat mode. color mode added. login for admins
+# lastmod by DevBart : admin check. color mode added. login for admins
 # Username: admin Password: letmein
 # push 4
-print("MasterMind")
 
 import random
+
+print("MasterMind")
 
 # Define available colors
 COLOR_LIST = ["Red", "Green", "Blue", "Yellow", "Orange", "Purple"]
 COLOR_SET = set(color.lower() for color in COLOR_LIST)  # for case-insensitive matching
+
 
 def generate_Code(length=4, mode="numbers"):
     if mode == "colors":
         return [random.choice(COLOR_LIST) for _ in range(length)]
     else:
         return [str(random.randint(1, 6)) for _ in range(length)]
+
 
 def get_Feedback(secret, guess):
     black_Pegs = sum(s.lower() == g.lower() for s, g in zip(secret, guess))
@@ -33,12 +36,16 @@ def get_Feedback(secret, guess):
             secret_Counts[s_key] = secret_Counts.get(s_key, 0) + 1
             guess_Counts[g_key] = guess_Counts.get(g_key, 0) + 1
 
-    white_Pegs = sum(min(secret_Counts.get(k, 0), guess_Counts.get(k, 0)) for k in guess_Counts)
+    white_Pegs = sum(
+        min(secret_Counts.get(k, 0), guess_Counts.get(k, 0)) for k in guess_Counts
+    )
 
     return black_Pegs, white_Pegs
 
+
 def show_Secret(mystery):
     print("SECRET:", ' '.join(mystery))
+
 
 def admin_login():
     print("Admin Login")
@@ -52,6 +59,7 @@ def admin_login():
     else:
         print("❌ Invalid credentials.")
         return False
+
 
 def play_Mastermind(is_admin=False):
     print("Welcome to Mastermind!")
@@ -69,7 +77,9 @@ def play_Mastermind(is_admin=False):
     if mode == "numbers":
         print("Guess the 4-digit code. Each digit is from 1 to 6. You have 10 attempts.")
     else:
-        print("Guess the 4-color code. Use full color names (e.g., Red Green Blue Yellow).")
+        print(
+            "Guess the 4-color code. Use full color names (e.g., Red Green Blue Yellow)."
+        )
         print("Available colors:", ', '.join(COLOR_LIST))
         print("You have 10 attempts. Input example: Red Blue Yellow Green")
 
@@ -92,7 +102,9 @@ def play_Mastermind(is_admin=False):
                     print("Invalid input. Enter 4 digits from 1 to 6.")
             else:
                 guess = raw.split()
-                valid_Guess = len(guess) == 4 and all(word.lower() in COLOR_SET for word in guess)
+                valid_Guess = len(guess) == 4 and all(
+                    word.lower() in COLOR_SET for word in guess
+                )
                 if not valid_Guess:
                     print("Invalid input. Enter 4 valid color names separated by spaces.")
                     print("Example: Red Blue Green Yellow")
@@ -105,6 +117,7 @@ def play_Mastermind(is_admin=False):
             return
 
     print(f"❌ Sorry, you've used all attempts. The correct code was: {' '.join(secret_Code)}")
+
 
 if __name__ == "__main__":
     is_admin = False
