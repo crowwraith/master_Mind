@@ -5,7 +5,7 @@
 # 15-8-2024
 # lastmod by DevBart : admin check. color mode added. login for admins
 # Username: admin Password: letmein
-# push 4
+# push 8
 
 import random
 
@@ -13,7 +13,8 @@ print("MasterMind")
 
 # Define available colors
 COLOR_LIST = ["Red", "Green", "Blue", "Yellow", "Orange", "Purple"]
-COLOR_SET = set(color.lower() for color in COLOR_LIST)  # for case-insensitive matching
+# for case-insensitive matching
+COLOR_SET = {color.lower() for color in COLOR_LIST}
 
 
 def generate_Code(length=4, mode="numbers"):
@@ -75,10 +76,14 @@ def play_Mastermind(is_admin=False):
     attempts = 10
 
     if mode == "numbers":
-        print("Guess the 4-digit code. Each digit is from 1 to 6. You have 10 attempts.")
+        print(
+            "Guess the 4-digit code. Each digit is from 1 to 6. "
+            "You have 10 attempts."
+        )
     else:
         print(
-            "Guess the 4-color code. Use full color names (e.g., Red Green Blue Yellow)."
+            "Guess the 4-color code. Use full color names "
+            "(e.g., Red Green Blue Yellow)."
         )
         print("Available colors:", ', '.join(COLOR_LIST))
         print("You have 10 attempts. Input example: Red Blue Yellow Green")
@@ -106,17 +111,29 @@ def play_Mastermind(is_admin=False):
                     word.lower() in COLOR_SET for word in guess
                 )
                 if not valid_Guess:
-                    print("Invalid input. Enter 4 valid color names separated by spaces.")
+                    print(
+                        "Invalid input. Enter 4 valid color names separated "
+                        "by spaces."
+                    )
                     print("Example: Red Blue Green Yellow")
 
         black, white = get_Feedback(secret_Code, guess)
-        print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
+        print(
+            f"Black pegs (correct position): {black}, "
+            f"White pegs (wrong position): {white}"
+        )
 
         if black == 4:
-            print(f"🎉 Congratulations! You guessed the code: {' '.join(secret_Code)}")
+            print(
+                f"🎉 Congratulations! You guessed the code: "
+                f"{' '.join(secret_Code)}"
+            )
             return
 
-    print(f"❌ Sorry, you've used all attempts. The correct code was: {' '.join(secret_Code)}")
+    print(
+        f"❌ Sorry, you've used all attempts. "
+        f"The correct code was: {' '.join(secret_Code)}"
+    )
 
 
 if __name__ == "__main__":
@@ -126,6 +143,10 @@ if __name__ == "__main__":
         print("1. Play Mastermind")
         print("2. Login as Admin")
         print("3. Quit")
+        print(
+            "Note: Admins can use 'cheat' during a game "
+            "to reveal the secret code."
+        )
         choice = input("Choose an option (1-3): ").strip()
 
         if choice == "1":
@@ -137,3 +158,4 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice.")
+
