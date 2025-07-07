@@ -5,6 +5,7 @@
 # 15-8-2024
 # lastmod by DevBart : admin check on cheat mode. color mode added. login for admins
 # Username: admin Password: letmein
+# push 2
 print("MasterMind")
 
 import random
